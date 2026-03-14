@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clinic Queue</title>
+</head>
+<body style="font-family: sans-serif; margin: 40px; background-color: #f0f8ff;">
+    <h1>🏥 Clinic Patient Queue</h1>
+    
+    <form action="/add" method="POST" style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #ccc;">
+        <input type="text" name="name" placeholder="Patient Name" required>
+        <input type="text" name="ailment" placeholder="Ailment" required>
+        <button type="submit">Add to Queue</button>
+    </form>
+
+    <hr>
+
+    <h3>Patients Waiting (FIFO Order)</h3>
+    <ul>
+        {% for p in patients %}
+        <li><strong>{{ p.timestamp }}</strong> - {{ p.name }} ({{ p.ailment }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
