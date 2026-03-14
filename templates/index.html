@@ -18,8 +18,11 @@
     <h3>Patients Waiting (FIFO Order)</h3>
     <ul>
         {% for p in patients %}
-        <li><strong>{{ p.timestamp }}</strong> - {{ p.name }} ({{ p.ailment }})</li>
-        {% endfor %}
-    </ul>
+        <li>
+            {{ p.name }} - {{ p.ailment }} 
+            <a href="/delete/{{loop.index0}}" style="color: red; margin-left: 20px;">[Remove]</a>
+        </li>
+    {% endfor %}
+</ul>
 </body>
 </html>
