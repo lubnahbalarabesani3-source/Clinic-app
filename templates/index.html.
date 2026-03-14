@@ -1,14 +1,14 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Clinic Queue</title>
 </head>
-<body style="font-family: sans-serif; margin: 40px; background-color: #f0f8ff;">
+<body style="font-family: sans-serif; margin: 40px;">
     <h1>🏥 Clinic Patient Queue</h1>
+
     <p><strong>Total Patients in Queue:</strong> {{ patients|length }}</p>
 
-    <form action="/add" method="POST" style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #ccc;">
+    <form action="/add" method="POST">
         <input type="text" name="name" placeholder="Patient Name" required>
         <input type="text" name="ailment" placeholder="Ailment" required>
         <button type="submit">Add to Queue</button>
@@ -19,11 +19,12 @@
     <h3>Patients Waiting (FIFO Order)</h3>
     <ul>
         {% for p in patients %}
-        <li>
-            {{ p.name }} - {{ p.ailment }} 
-            <a href="/delete/{{loop.index0}}" style="color: red; margin-left: 20px;">[Remove]</a>
-        </li>
-    {% endfor %}
-</ul>
+            <li>
+                {{ p.name }} - {{ p.ailment }}
+                <a href="/delete/{{ loop.index0 }}" style="color: red; margin-left: 20px;">[Remove]</a>
+            </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
+
