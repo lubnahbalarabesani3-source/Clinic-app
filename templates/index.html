@@ -6,7 +6,7 @@
 </head>
 <body style="font-family: sans-serif; margin: 40px; background-color: #f0f8ff;">
     <h1>🏥 Clinic Patient Queue</h1>
-    <p><strong>Total Patients in Queue:</strong> {{ patients|length }}</p>
+    <p><strong>Total Patients in Queue:</strong> {{ patients|length }} <a href="/clear" style="margin-left: 20px; color: orange; text-decoration: none;">[Clear All]</a></p>
 
     <form action="/add" method="POST" style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #ccc;">
         <input type="text" name="name" placeholder="Patient Name" required>
