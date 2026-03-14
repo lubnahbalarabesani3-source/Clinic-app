@@ -19,5 +19,12 @@ def add_patient():
         patient_queue.append(new_p)
     return redirect('/')
 
+@app.route('/delete/<int:index>')
+def delete_patient(index):
+    if 0 <= index < len(patient_queue):
+        patient_queue.pop(index)
+    return redirect('/')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
