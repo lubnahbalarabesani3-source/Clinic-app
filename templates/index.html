@@ -1,29 +1,46 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Clinic Queue</title>
+    <title>Clinic Queue Pro</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .stats { background: #ecf0f1; padding: 10px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        input[type="text"] { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
+        button { width: 100%; padding: 12px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        button:hover { background-color: #2980b9; }
+        ul { list-style: none; padding: 0; }
+        li { background: #fff; margin-bottom: 10px; padding: 15px; border-left: 5px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
+        .delete-btn { color: #e74c3c; text-decoration: none; font-weight: bold; font-size: 14px; }
+        .clear-btn { color: #e67e22; text-decoration: none; font-weight: bold; }
+    </style>
 </head>
-<body style="font-family: sans-serif; margin: 40px; background-color: #f0f8ff;">
-    <h1>🏥 Clinic Patient Queue</h1>
-    <p><strong>Total Patients in Queue:</strong> {{ patients|length }} <a href="/clear" style="margin-left: 20px; color: orange; text-decoration: none;">[Clear All]</a></p>
+<body>
+    <div class="container">
+        <h1>🏥 Clinic Patient Queue</h1>
+        
+        <div class="stats">
+            <span><strong>Total Patients:</strong> {{ patients|length }}</span>
+            <a href="/clear" class="clear-btn">[Clear All]</a>
+        </div>
 
-    <form action="/add" method="POST" style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #ccc;">
-        <input type="text" name="name" placeholder="Patient Name" required>
-        <input type="text" name="ailment" placeholder="Ailment" required>
-        <button type="submit">Add to Queue</button>
-    </form>
+        <form action="/add" method="POST">
+            <input type="text" name="name" placeholder="Patient Name" required>
+            <input type="text" name="ailment" placeholder="Ailment" required>
+            <button type="submit">Add to Queue</button>
+        </form>
 
-    <hr>
-
-    <h3>Patients Waiting (FIFO Order)</h3>
-    <ul>
-        {% for p in patients %}
-        <li>
-            {{ p.name }} - {{ p.ailment }} 
-            <a href="/delete/{{loop.index0}}" style="color: red; margin-left: 20px;">[Remove]</a>
-        </li>
-    {% endfor %}
-</ul>
+        <h3>Current Waitlist</h3>
+        <ul>
+            {% for p in patients %}
+            <li>
+                <div><strong>{{ p.name }}</strong> - {{ p.ailment }}</div>
+                <a href="/delete/{{ loop.index0 }}" class="delete-btn">Remove</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>
+
