@@ -41,11 +41,13 @@
         <h3>Current Waitlist</h3>
         <ul>
             {% for p in patients %}
-            <li style="border-left: 5px solid {% if p.priority == 'Emergency' %}#e74c3c{% elif p.priority == 'Urgent' %}#f1c40f{% else %}#2ecc71{% endif %};">
+            <li style="border-left: 5px solid ...">
     <div>
         <strong>{{ p.name }}</strong> - {{ p.ailment }} 
+        <br><span style="font-size: 0.85em; color: #7f8c8d;">🕒 Arrived at: {{ p.time }}</span>
         <br><small style="color: #7f8c8d;">Status: {{ p.priority }}</small>
     </div>
+
     <a href="/delete/{{ loop.index0 }}" class="delete-btn">Remove</a>
 </li>
 

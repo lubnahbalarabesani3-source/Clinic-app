@@ -1,4 +1,5 @@
 from flask import Flask,render_template,request,redirect,url_for
+from datetime import datetime
 from models import Patient
 
 app = Flask(__name__)
@@ -16,10 +17,18 @@ def add_patient():
     ailment = request.form.get('ailment')
     priority = request.form.get('priority')
     
+    current_time = datetime.now().strftime("%H:%M")
+
     if name and ailment:
-        patient_queue.append({'name': name, 'ailment': ailment, 'priority': priority})
+        patient_queue.append({
+            'name': name, 
+            'ailment': ailment, 
+            'priority': priority, 
+            'time': current_time
+        })
     
     return redirect(url_for('index'))
+
 
 
 @app.route('/delete/<int:index>')
