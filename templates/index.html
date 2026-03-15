@@ -32,7 +32,7 @@
         {% endif %}
     </span>
 
-            <a href="/clear" class="clear-btn">[Clear All]</a>
+            <a href="/clear" class="text-danger" onclick="return confirm('Are you sure you want to clear the entire queue?');" style="text-decoration: none; font-size: 0.8em;">[Clear All]</a>
         </div>
 
         <form action="/add" method="POST">
@@ -46,6 +46,7 @@
 
             <button type="submit">Add to Queue</button>
         </form>
+<input type="number" name="age" placeholder="Age" style="width: 70px;">
 <input type="text" id="searchInput" onkeyup="searchPatients()" placeholder="Search for a patient name..." style="margin-bottom: 10px; border: 2px solid #3498db;">
 
         <h3>Current Waitlist</h3>
@@ -53,10 +54,11 @@
             {% for p in patients %}
             <li style="border-left: 5px solid ...">
     <div>
-        <strong>{{ p.name }}</strong> - {{ p.ailment }} 
-        <br><span style="font-size: 0.85em; color: #7f8c8d;">🕒 Arrived at: {{ p.time }}</span>
-        <br><small style="color: #7f8c8d;">Status: {{ p.priority }}</small>
-    </div>
+    <strong>{{ p.name }}</strong> - {{ p.ailment }}
+    <br><span style="font-size: 0.85em; color: #7f8c8d;">🕒 Arrived at: {{ p.time }}</span>
+    <br><span style="font-size: 0.85em; color: #7f8c8d;">👤 Age: {{ p.age }}</span>
+    <br><small style="color: #7f8c8d;">Status: {{ p.priority }}</small>
+</div>
 
     <a href="/delete/{{ loop.index0 }}" class="delete-btn">Remove</a>
 </li>

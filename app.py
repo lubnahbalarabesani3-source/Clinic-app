@@ -16,17 +16,17 @@ def add_patient():
     name = request.form.get('name')
     ailment = request.form.get('ailment')
     priority = request.form.get('priority')
-    
-    current_time = datetime.now().strftime("%H:%M")
+    age = request.form.get('age')
+    time_arrived = datetime.now().strftime("%H:%M")
 
     if name and ailment:
         patient_queue.append({
             'name': name, 
             'ailment': ailment, 
             'priority': priority, 
-            'time': current_time
+            'time': time_arrived,
+            'age': age
         })
-    
     return redirect(url_for('index'))
 
 
