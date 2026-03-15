@@ -21,7 +21,17 @@
         <h1>🏥 Clinic Patient Queue</h1>
         
         <div class="stats">
-            <span><strong>Total Patients:</strong> {{ patients|length }}</span>
+    <span>
+        <strong>Total Patients:</strong> 
+        <span style="{% if patients|length > 5 %}color: red; font-weight: bold;{% endif %}">
+            {{ patients|length }}
+        </span>
+        
+        {% if patients|length > 5 %}
+            <span style="color: red; margin-left: 10px;">⚠️ Clinic is Busy!</span>
+        {% endif %}
+    </span>
+
             <a href="/clear" class="clear-btn">[Clear All]</a>
         </div>
 
