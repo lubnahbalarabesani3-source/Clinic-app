@@ -28,16 +28,26 @@
         <form action="/add" method="POST">
             <input type="text" name="name" placeholder="Patient Name" required>
             <input type="text" name="ailment" placeholder="Ailment" required>
+          <select name="priority" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ddd;">
+    <option value="Routine">Routine (Green)</option>
+    <option value="Urgent">Urgent (Yellow)</option>
+    <option value="Emergency">Emergency (Red)</option>
+</select>
+
             <button type="submit">Add to Queue</button>
         </form>
 
         <h3>Current Waitlist</h3>
         <ul>
             {% for p in patients %}
-            <li>
-                <div><strong>{{ p.name }}</strong> - {{ p.ailment }}</div>
-                <a href="/delete/{{ loop.index0 }}" class="delete-btn">Remove</a>
-            </li>
+            <li style="border-left: 5px solid {% if p.priority == 'Emergency' %}#e74c3c{% elif p.priority == 'Urgent' %}#f1c40f{% else %}#2ecc71{% endif %};">
+    <div>
+        <strong>{{ p.name }}</strong> - {{ p.ailment }} 
+        <br><small style="color: #7f8c8d;">Status: {{ p.priority }}</small>
+    </div>
+    <a href="/delete/{{ loop.index0 }}" class="delete-btn">Remove</a>
+</li>
+
             {% endfor %}
         </ul>
     </div>

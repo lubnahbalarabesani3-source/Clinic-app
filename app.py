@@ -14,10 +14,13 @@ def index():
 def add_patient():
     name = request.form.get('name')
     ailment = request.form.get('ailment')
+    priority = request.form.get('priority')
+    
     if name and ailment:
-        new_p = Patient(name, ailment)
-        patient_queue.append(new_p)
-    return redirect('/')
+        patient_queue.append({'name': name, 'ailment': ailment, 'priority': priority})
+    
+    return redirect(url_for('index'))
+
 
 @app.route('/delete/<int:index>')
 def delete_patient(index):
